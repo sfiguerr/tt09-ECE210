@@ -18,7 +18,7 @@ module lif(
         if (!reset_n) begin
             state <= 0;
             threshold <= 200;
-            beta <= 16'0000000010000000;    //0.5
+            beta <= 16'b0000000010000000;    //0.5
             delta <= 16'b0000000001000000;  //0.25
             timer <= 8'b00000000;
         end else begin
