@@ -38,7 +38,8 @@ module lif(
 
     assign next_leak = leak + (delta / timer);
 
-    assign next_state = current + (spike ? 0: (beta * state)) - leak;
+    //assign next_state = current + (spike ? 0: (beta * state)) - leak;
+    assign next_state = {8'b0, current} + (spike ? 0 : (beta * state)) - {8'b0, leak};
     //assign next_state = current + (state >> 1);
 
     //spiking logic
