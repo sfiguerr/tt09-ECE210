@@ -9,7 +9,7 @@ module lif(
 );
 
     wire [7:0] next_state, next_leak, leak;
-    reg [7:0] threshold;
+    reg [7:0] threshold, timer;
     reg [15:0] beta, delta;
 
     always @(posedge clk) begin
@@ -24,7 +24,7 @@ module lif(
         end else begin
             state <= next_state;
             leak <= next_leak;
-            if(spk)begin
+            if (spike) begin
                 timer <=8'b00000000;
             end else begin
                 if (timer == 8'b11111111) begin
@@ -38,7 +38,7 @@ module lif(
 
     assign next_leak = leak + (delta / timer);
 
-    assign next_state = current + (spk ? 0: (beta * state)) - leak;
+    assign next_state = current + (spike ? 0: (beta * state)) - leak;
     //assign next_state = current + (state >> 1);
 
     //spiking logic
