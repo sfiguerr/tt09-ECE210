@@ -36,11 +36,11 @@ module lif(
         end
     end
 
-    assign next_leak = leak + (delta / timer);
+    //assign next_leak = leak + (delta / timer);
 
     //assign next_state = current + (spike ? 0: (beta * state)) - leak;
-    assign next_state = {8'b0, current} + (spike ? 0 : (beta * state)) - {8'b0, leak};
-    //assign next_state = current + (state >> 1);
+    assign next_leak = ({8'b0, leak} + (delta / timer))[7:0];  // Extend leak to 16 bits
+    assign next_state = ({8'b0, current} + (spike ? 0 : (beta * state)) - {8'b0, leak})[7:0];     //assign next_state = current + (state >> 1);
 
     //spiking logic
     assign spike = (state >= threshold);
