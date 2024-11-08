@@ -9,7 +9,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-This is how it works
+This neuron model is an adaptive leaky integrate and fire neuron. It behaves similarly to a traditional leaky integrate and fire neuron(LIF), but takes into consideration the frequency of spikes occurring. In other words, if a simple LIF were to spike at a consistent rate, the adaptive LIF model will spike less often over time.
 
 ## How to test
 
@@ -17,4 +17,4 @@ This is how to use it
 
 ## External hardware
 
-no
+There is no external hardware for this model.
