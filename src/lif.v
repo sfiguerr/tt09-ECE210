@@ -4,8 +4,8 @@ module lif #(
     parameter DELTA_NUM = 1,
     parameter DELTA_DEN = 4,
     parameter BETA_NUM = 1,
-    parameter BETA_DEN = 2,
-)(
+    parameter BETA_DEN = 2
+) (
     input wire[ 7:0]    current,
     input wire          clk,
     input wire          reset_n,
