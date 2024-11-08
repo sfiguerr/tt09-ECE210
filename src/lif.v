@@ -11,6 +11,8 @@ module lif(
     wire [7:0] next_state, next_leak, leak;
     reg [7:0] threshold, timer;
     reg [15:0] beta, delta;
+    wire [15:0] state_sum;
+    wire [31:0] scale_delta, leak_sum;
 
     always @(posedge clk) begin
         //timer ++;
@@ -39,8 +41,12 @@ module lif(
     //assign next_leak = leak + (delta / timer);
 
     //assign next_state = current + (spike ? 0: (beta * state)) - leak;
-    assign next_leak = ({8'b0, leak} + (delta / timer))[7:0];  // Extend leak to 16 bits
-    assign next_state = ({8'b0, current} + (spike ? 0 : (beta * state)) - {8'b0, leak})[7:0];     //assign next_state = current + (state >> 1);
+    assign scaled_delta = delta << 16;
+    assign leak_sum = {24'b0, leak} + (scaled_delta / timer);
+    assign next_leak = leak_sum[7:0];  // Extend leak to 16 bits
+
+    assign state_sum = {8'b0, current} + (spike ? 0 : (beta * state)) - {8'b0, leak};
+    assign next_state = state_sum[7:0];     //assign next_state = current + (state >> 1);
 
     //spiking logic
     assign spike = (state >= threshold);
