@@ -8,8 +8,8 @@ module lif(
     output wire         spike
 );
 
-    wire [7:0] next_state, next_leak, leak;
-    reg [7:0] threshold, timer;
+    wire [7:0] next_state, next_leak;
+    reg [7:0] threshold, timer, leak;
     reg [15:0] beta, delta;
     wire [31:0] scaled_delta, leak_sum, scaled_state, state_sum;
 
@@ -18,6 +18,7 @@ module lif(
         //if (spk) reset
         if (!reset_n) begin
             state <= 0;
+            leak <= 0;
             threshold <= 200;
             beta <= 16'b0000000010000000;    //0.5
             delta <= 16'b0000000001000000;  //0.25
