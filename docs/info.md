@@ -13,7 +13,7 @@ This neuron model is an adaptive leaky integrate and fire neuron. It behaves sim
 
 ## How to test
 
-This is how to use it
+The file test.py shpuld be used to test this model. By applying varying input values with an expected output, you can measure the accuracy of this implementation of an adaptive leaky integrate and fire neuron.
 
 ## External hardware
 
